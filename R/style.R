@@ -34,7 +34,7 @@
 #' @name grk_style
 NULL
 
-#' @describeIn grk_style Set the \pkg{grkmisc} style as the default style for
+#' @describeIn grk_style Set the \pkg{grkstyle} style as the default style for
 #'   \pkg{styler} addins.
 #' @export
 use_grk_style <- function() {
@@ -102,27 +102,27 @@ grk_style_transformer <- function(...) {
   tidy_style
 }
 
-#' @describeIn grk_style Style text using the \pkg{grkmisc} code style
+#' @describeIn grk_style Style text using the \pkg{grkstyle} code style
 #' @inheritParams styler::style_text
 #' @export
 grk_style_text <- function(text, ...) {
   styler::style_text(text, ..., transformers = grk_style_transformer())
 }
 
-#' @describeIn grk_style Style a file using the \pkg{grkmisc} code style
+#' @describeIn grk_style Style a file using the \pkg{grkstyle} code style
 #' @inheritParams styler::style_file
 #' @export
 grk_style_file <- function(path, ...) {
   styler::style_file(path, ..., transformers = grk_style_transformer())
 }
 
-#' @describeIn grk_style Style a directory using the \pkg{grkmisc} code style
+#' @describeIn grk_style Style a directory using the \pkg{grkstyle} code style
 #' @export
 grk_style_dir <- function(path, ...) {
   styler::style_dir(path, ..., transformers = grk_style_transformer())
 }
 
-#' @describeIn grk_style Style a package using the \pkg{grkmisc} code style
+#' @describeIn grk_style Style a package using the \pkg{grkstyle} code style
 #' @inheritParams styler::style_pkg
 #' @export
 grk_style_pkg <- function(pkg, ...) {

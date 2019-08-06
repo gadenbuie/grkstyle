@@ -43,18 +43,18 @@ function arguments in function definitions.
 }
 \section{Functions}{
 \itemize{
-\item \code{use_grk_style}: Set the \pkg{grkmisc} style as the default style for
+\item \code{use_grk_style}: Set the \pkg{grkstyle} style as the default style for
 \pkg{styler} addins.
 
 \item \code{grk_style_transformer}: A code transformer for use with \code{\link[styler:style_text]{styler::style_text()}}
 
-\item \code{grk_style_text}: Style text using the \pkg{grkmisc} code style
+\item \code{grk_style_text}: Style text using the \pkg{grkstyle} code style
 
-\item \code{grk_style_file}: Style a file using the \pkg{grkmisc} code style
+\item \code{grk_style_file}: Style a file using the \pkg{grkstyle} code style
 
-\item \code{grk_style_dir}: Style a directory using the \pkg{grkmisc} code style
+\item \code{grk_style_dir}: Style a directory using the \pkg{grkstyle} code style
 
-\item \code{grk_style_pkg}: Style a package using the \pkg{grkmisc} code style
+\item \code{grk_style_pkg}: Style a package using the \pkg{grkstyle} code style
 }}
 
 \section{Using the \pkg{grkstyle} code style}{

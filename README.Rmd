@@ -1,0 +1,84 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# grkstyle
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+[styler]: https://styler.r-lib.org
+
+`grkstyle` is an extension package for [styler] that holds my personal code style preferences.
+
+## Installation
+
+You can install the grkstyle from Github
+
+``` r
+# install.packages("devtools")
+devtools::install_github("grkstyle")
+```
+
+## Examples
+
+```{r example, eval=FALSE}
+library(grkstyle)
+
+# Set default code style for {styler} functions
+use_grk_style()
+```
+
+A few examples drawn from the [tidyverse style guide](https://style.tidyverse.org).
+
+**Unstyled**
+
+```{r, echo=FALSE, results="asis"}
+text <- '
+do_something_very_complicated(something = "that", requires = many,
+                              arguments = "some of which may be long")
+'
+
+cat("\n\n``` r", text, "```")
+```
+
+**Styled**
+
+```{r, echo=FALSE, results="asis"}
+text <- grkstyle::grk_style_text(text)
+
+cat("\n\n``` r", paste(text, collapse = "\n"), "\n```")
+```
+
+**Unstyled**
+
+```{r, echo=FALSE, results="asis"}
+text <- '
+long_function_name <- function(a = "a long argument",
+                               b = "another argument",
+                               c = "another long argument") {
+  # As usual code is indented by two spaces.
+}
+'
+
+cat("\n\n``` r", text, "```")
+```
+
+**Styled**
+
+```{r, echo=FALSE, results="asis"}
+text <- grkstyle::grk_style_text(text)
+
+cat("\n\n``` r", paste(text, collapse = "\n"), "\n```")
+```
+

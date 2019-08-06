@@ -1,0 +1,23 @@
+Package: grkstyle
+Title: A Tidy R Code Style
+Version: 0.0.1
+Authors@R: 
+    person(given = "Garrick",
+           family = "Aden-Buie",
+           role = c("aut", "cre"),
+           email = "garrick@aden-buie.com",
+           comment = c(ORCID = "0000-0002-7111-0077"))
+Description: A tidy code style building on the tidyverse code
+    style guidelines but with a small changes for consistent line breaks
+    and indentation. Enforces line breaks, if there are any initially
+    between arguments in function calls and left-indents arguments in
+    function definitions.
+License: MIT + file LICENSE
+Imports: 
+    purrr,
+    styler (>= 1.1.1),
+    magrittr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1

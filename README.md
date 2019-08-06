@@ -20,14 +20,20 @@ You can install the grkstyle from Github
 devtools::install_github("grkstyle")
 ```
 
-## Examples
+## Usage
+
+To use `grkstyle` by default in styler functions and addins
 
 ``` r
-library(grkstyle)
-
 # Set default code style for {styler} functions
-use_grk_style()
+grkstyle::use_grk_style()
 ```
+
+Or add the following to your `~/.Rprofile`
+
+    options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
+
+## Examples
 
 A few examples drawn from the [tidyverse style
 guide](https://style.tidyverse.org).

@@ -49,7 +49,9 @@ options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
 
 A few examples drawn from the [tidyverse style guide](https://style.tidyverse.org).
 
-**Unstyled**
+### Line Breaks Inside Function Calls
+
+**unstyled**
 
 ```{r, echo=FALSE, results="asis"}
 text <- '
@@ -60,15 +62,26 @@ do_something_very_complicated(something = "that", requires = many,
 cat("\n\n``` r", text, "```")
 ```
 
-**Styled**
+**grkstyle**
 
 ```{r, echo=FALSE, results="asis"}
-text <- grkstyle::grk_style_text(text)
+text_grk <- grkstyle::grk_style_text(text)
 
-cat("\n\n``` r", paste(text, collapse = "\n"), "\n```")
+cat("\n\n``` r", paste(text_grk, collapse = "\n"), "\n```")
 ```
 
-**Unstyled**
+
+**styler::tidyverse_style**
+
+```{r, echo=FALSE, results="asis"}
+text_tidy <- styler::style_text(text)
+
+cat("\n\n``` r", paste(text_tidy, collapse = "\n"), "\n```")
+```
+
+### Indentation of Function Arguments
+
+**unstyled**
 
 ```{r, echo=FALSE, results="asis"}
 text <- '
@@ -82,11 +95,22 @@ long_function_name <- function(a = "a long argument",
 cat("\n\n``` r", text, "```")
 ```
 
-**Styled**
+**grkstyle**
 
 ```{r, echo=FALSE, results="asis"}
-text <- grkstyle::grk_style_text(text)
+text_grk <- grkstyle::grk_style_text(text)
 
-cat("\n\n``` r", paste(text, collapse = "\n"), "\n```")
+cat("\n\n``` r", paste(text_grk, collapse = "\n"), "\n```")
 ```
+
+
+**styler::tidyverse_style**
+
+```{r, echo=FALSE, results="asis"}
+text_tidy <- styler::style_text(text)
+
+cat("\n\n``` r", paste(text_tidy, collapse = "\n"), "\n```")
+```
+
+
 

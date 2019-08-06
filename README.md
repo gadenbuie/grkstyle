@@ -38,14 +38,16 @@ Or add the following to your `~/.Rprofile`
 A few examples drawn from the [tidyverse style
 guide](https://style.tidyverse.org).
 
-**Unstyled**
+### Line Breaks Inside Function Calls
+
+**unstyled**
 
 ``` r
 do_something_very_complicated(something = "that", requires = many,
                               arguments = "some of which may be long")
 ```
 
-**Styled**
+**grkstyle**
 
 ``` r
 do_something_very_complicated(
@@ -55,7 +57,18 @@ do_something_very_complicated(
 ) 
 ```
 
-**Unstyled**
+**styler::tidyverse\_style**
+
+``` r
+do_something_very_complicated(
+  something = "that", requires = many,
+  arguments = "some of which may be long"
+) 
+```
+
+### Indentation of Function Arguments
+
+**unstyled**
 
 ``` r
 long_function_name <- function(a = "a long argument",
@@ -65,7 +78,7 @@ long_function_name <- function(a = "a long argument",
 }
 ```
 
-**Styled**
+**grkstyle**
 
 ``` r
 long_function_name <- function(
@@ -73,6 +86,16 @@ long_function_name <- function(
   b = "another argument",
   c = "another long argument"
 ) {
+  # As usual code is indented by two spaces.
+} 
+```
+
+**styler::tidyverse\_style**
+
+``` r
+long_function_name <- function(a = "a long argument",
+                               b = "another argument",
+                               c = "another long argument") {
   # As usual code is indented by two spaces.
 } 
 ```

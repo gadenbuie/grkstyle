@@ -17,7 +17,7 @@ You can install the grkstyle from Github
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("grkstyle")
+devtools::install_github("gadenbuie/grkstyle")
 ```
 
 ## Usage

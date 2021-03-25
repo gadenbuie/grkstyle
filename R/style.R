@@ -79,6 +79,8 @@ grk_style_transformer <- function(...) {
     idx_comma <- which(pd$token == "','")
     idx_open_paren <- grep("'[[(]'", pd$token)
     idx_close_paren <- grep("'(]|\\))'", pd$token)
+    idx_comma_has_comment <- which(pd$token[idx_comma + 1] == "COMMENT")
+    idx_comma[idx_comma_has_comment] <- idx_comma[idx_comma_has_comment] + 1
     pd[idx_comma + 1L, "lag_newlines"] <- 1L
     if (length(idx_open_paren)) {
       pd[idx_open_paren[1] + 1L, "lag_newlines"] <- 1L

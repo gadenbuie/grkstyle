@@ -73,7 +73,7 @@ use_grk_style()
 styler:::style_selection()
 }
 
-ex_code <- "mtcars \%>\% mutate(mpg = mpg * 2,\\n\\t\\t     cyl = paste(cyl)) \%>\% head()"
+ex_code <- "mtcars \%>\% mutate(mpg = mpg * 2,\n\t\t     cyl = paste(cyl)) \%>\% head()"
 cat(ex_code)
 
 grk_style_text(ex_code)

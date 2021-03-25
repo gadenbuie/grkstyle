@@ -1,6 +1,6 @@
 Package: grkstyle
 Title: A Tidy R Code Style
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -13,13 +13,16 @@ Description: A tidy code style building on the tidyverse code
     between arguments in function calls and left-indents arguments in
     function definitions.
 License: MIT + file LICENSE
+URL: https://github.com/gadenbuie/grkstyle
+BugReports: https://github.com/gadenbuie/grkstyle/issues
 Imports: 
+    magrittr,
     purrr,
-    styler (>= 1.1.1),
-    magrittr
+    styler (>= 1.1.1)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
-URL: https://github.com/gadenbuie/grkstyle
-BugReports: https://github.com/gadenbuie/grkstyle/issues
+RoxygenNote: 7.1.1

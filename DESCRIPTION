@@ -1,6 +1,6 @@
 Package: grkstyle
 Title: A Tidy R Code Style
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -18,7 +18,7 @@ BugReports: https://github.com/gadenbuie/grkstyle/issues
 Imports: 
     magrittr,
     purrr,
-    styler (>= 1.1.1)
+    styler (>= 1.4.0)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

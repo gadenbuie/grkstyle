@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Garrick",
            family = "Aden-Buie",
            role = c("aut", "cre"),
-           email = "garrick@aden-buie.com",
+           email = "garrick@adenbuie.com",
            comment = c(ORCID = "0000-0002-7111-0077"))
 Description: A tidy code style building on the tidyverse code
     style guidelines but with a small changes for consistent line breaks

@@ -20,7 +20,7 @@ grk_style_file(path, ...)
 
 grk_style_dir(path, ...)
 
-grk_style_pkg(pkg, ...)
+grk_style_pkg(pkg = ".", ...)
 }
 \arguments{
 \item{...}{Arguments passed to underling \pkg{styler} functions (identified

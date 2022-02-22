@@ -127,6 +127,6 @@ grk_style_dir <- function(path, ...) {
 #' @describeIn grk_style Style a package using the \pkg{grkstyle} code style
 #' @inheritParams styler::style_pkg
 #' @export
-grk_style_pkg <- function(pkg, ...) {
+grk_style_pkg <- function(pkg = ".", ...) {
   styler::style_pkg(pkg, ..., transformers = grk_style_transformer())
 }

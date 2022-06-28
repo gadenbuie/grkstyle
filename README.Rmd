@@ -49,6 +49,33 @@ options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
 
 A few examples drawn from the [tidyverse style guide](https://style.tidyverse.org).
 
+### Tabs vs Spaces
+
+I've been staunchly committed to indentation by two spaces,
+but I've recently come to realize that indentation with tabs is objectively better.
+Primarily [it's about accessibility](https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/).
+Using tabs allows others to choose their preferred indentation levels,
+it accommodates more code authors in a wider variety of scenarios,
+and it's better for Braille code readers:
+
+> The main reason I would like to see this change is for refreshable braille displays that are used by blind programmers a lot. Each space wastes one braille cell and takes away valuable braille realestate. So if the default indentation of a project is 4 spaces per level, a 3rd level indentation wastes 12 braille cells before code starts.  
+> — [Comment](https://github.com/prettier/prettier/issues/7475#issuecomment-668544890) by [MarcoZehe](https://github.com/MarcoZehe)
+
+**unstyled**
+
+```{r echo = FALSE, results = "asis"}
+text_vec <- 'fruits <- c(\n  "apple",\n  "banana",\n  "mango"\n)'
+cat("\n``` r", text_vec, "```", sep = "\n")
+```
+
+**grkstyle**
+
+```{r, echo=FALSE, results="asis"}
+text_vec <- grkstyle::grk_style_text(text_vec)
+
+cat("\n``` r", paste(text_vec, collapse = "\n"), "```", sep = "\n")
+```
+
 ### Line Breaks Inside Function Calls
 
 **unstyled**

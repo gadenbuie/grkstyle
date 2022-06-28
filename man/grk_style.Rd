@@ -12,7 +12,7 @@
 \usage{
 use_grk_style()
 
-grk_style_transformer(...)
+grk_style_transformer(..., use_tabs = getOption("grkstyle.use_tabs", TRUE))
 
 grk_style_text(text, ...)
 
@@ -26,6 +26,20 @@ grk_style_pkg(pkg = ".", ...)
 \item{...}{Arguments passed to underling \pkg{styler} functions (identified
 by removing the \code{grk_} prefix), except for \code{transofrmers}, which is set to
 the \code{grk_style_transformer()} internally.}
+
+\item{use_tabs}{Should a single tab be used for indentation? The new default
+in \pkg{grkstyle} is \code{TRUE}, meaning that tabs are used. I set the RStudio
+global option to show tabs as two spaces. Tabs are recommended because they
+are \href{https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/}{more accessible}.
+
+You can opt into indentation by two spaces by setting the
+\code{grkstyle.use_tabs} option:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# two spaces
+options(grkstyle.use_tabs = FALSE)
+# equivalent
+options(grkstyle.use_tabs = list(indent_by = 2, indent_character = " "))
+}\if{html}{\out{</div>}}}
 
 \item{text}{A character vector with text to style.}
 
@@ -62,8 +76,10 @@ function arguments in function definitions.
 code style as the default code style for \pkg{styler} (and its associated
 RStudio addins, like "Style active file" and "Style selection") by calling
 \code{grkstyle::use_grk_style()}. If you would rather set this option globally
-for all session, you can add the following to your \code{.Rprofile}:\preformatted{options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
-}
+for all session, you can add the following to your \code{.Rprofile}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
+}\if{html}{\out{</div>}}
 }
 
 \examples{

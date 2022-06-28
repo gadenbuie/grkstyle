@@ -38,95 +38,127 @@ NULL
 #'   \pkg{styler} addins.
 #' @export
 use_grk_style <- function() {
-  options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
+	options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
 }
 
 #' @describeIn grk_style A code transformer for use with [styler::style_text()]
+#' @param use_tabs Should a single tab be used for indentation? The new default
+#'   in \pkg{grkstyle} is `TRUE`, meaning that tabs are used. I set the RStudio
+#'   global option to show tabs as two spaces. Tabs are recommended because they
+#'   are [more accessible](https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/).
+#'
+#'   You can opt into indentation by two spaces by setting the
+#'   `grkstyle.use_tabs` option:
+#'
+#'   ```r
+#'   # two spaces
+#'   options(grkstyle.use_tabs = FALSE)
+#'
+#'   # equivalently, but more precise
+#'   options(grkstyle.use_tabs = list(indent_by = 2, indent_character = " "))
+#'   ```
 #' @export
-grk_style_transformer <- function(...) {
-  tidy_style <- styler::tidyverse_style(...)
+grk_style_transformer <- function(
+	...,
+	use_tabs = getOption("grkstyle.use_tabs", TRUE)
+) {
+	if (isTRUE(use_tabs)) {
+		use_tabs <- list(indent_by = 1, indent_character = "\t")
+	} else if (identical(use_tabs, FALSE)) {
+		use_tabs <- list(indent_by = 2, indent_character = " ")
+	} else if (!setequal(c("indent_by", "indent_character"), names(use_tabs))) {
+		stop(
+			"`use_tabs` should be one of `TRUE`, `FALSE`, or a list containing ",
+			"items 'intent_by' or 'indent_character'."
+		)
+	}
 
-  # line breaks between *all* arguments if line breaks between *any*
-  tidy_style$line_break$set_linebreak_each_argument_if_multi_line <- function(pd) {
-    if (!(any(pd$token == "','"))) {
-      return(pd)
-    }
-    # does this expression contain expressions with linebreaks?
-    has_children <- purrr::some(pd$child, purrr::negate(is.null))
-    has_internal_linebreak <- FALSE
-    is_function_definition <- pd$token[1] == "FUNCTION"
-    if (has_children && !is_function_definition) {
-      children <- pd$child
+	tidy_style <- styler::tidyverse_style(
+		indent_by = use_tabs$indent_by
+	)
+	tidy_style$indent_character <- use_tabs$indent_character
 
-      # don't count anything inside {} as internal linebreaks
-      idx_pre_open_brace <- which(pd$token_after == "'{'")
-      if (length(idx_pre_open_brace)) {
-        children[idx_pre_open_brace + 1] <- NULL
-      }
+	# line breaks between *all* arguments if line breaks between *any*
+	tidy_style$line_break$set_linebreak_each_argument_if_multi_line <- function(pd) {
+		if (!(any(pd$token == "','"))) {
+			return(pd)
+		}
+		# does this expression contain expressions with linebreaks?
+		has_children <- purrr::some(pd$child, purrr::negate(is.null))
+		has_internal_linebreak <- FALSE
+		is_function_definition <- pd$token[1] == "FUNCTION"
+		if (has_children && !is_function_definition) {
+			children <- pd$child
 
-      has_internal_linebreak <- children %>%
-        purrr::discard(is.null) %>%
-        purrr::map_lgl(function(x) {
-          sum(x$newlines, x$lag_newlines) > 0
-        }) %>%
-        any()
-    }
+			# don't count anything inside {} as internal linebreaks
+			idx_pre_open_brace <- which(pd$token_after == "'{'")
+			if (length(idx_pre_open_brace)) {
+				children[idx_pre_open_brace + 1] <- NULL
+			}
 
-    if (!has_internal_linebreak && sum(pd$newlines, pd$lag_newlines) < 1) {
-      return(pd)
-    }
+			has_internal_linebreak <- children %>%
+				purrr::discard(is.null) %>%
+				purrr::map_lgl(function(x) {
+					sum(x$newlines, x$lag_newlines) > 0
+				}) %>%
+				any()
+		}
 
-    idx_comma <- which(pd$token == "','")
-    idx_open_paren <- grep("'[[(]'", pd$token)
-    idx_close_paren <- grep("'(]|\\))'", pd$token)
-    idx_comma_has_comment <- which(pd$token[idx_comma + 1] == "COMMENT")
-    idx_comma[idx_comma_has_comment] <- idx_comma[idx_comma_has_comment] + 1
-    pd[idx_comma + 1L, "lag_newlines"] <- 1L
-    if (length(idx_open_paren)) {
-      pd[idx_open_paren[1] + 1L, "lag_newlines"] <- 1L
-    }
-    if (length(idx_close_paren)) {
-      pd[idx_close_paren[length(idx_close_paren)], "lag_newlines"] <- 1L
-    }
-    pd
-  }
+		if (!has_internal_linebreak && sum(pd$newlines, pd$lag_newlines) < 1) {
+			return(pd)
+		}
 
-  # Function arguments on new lines, indented with 2 spaces
-  tidy_style$indention$update_indention_ref_fun_dec <- function(pd_nested) {
-    if (pd_nested$token[1] == "FUNCTION" && nrow(pd_nested) > 4) {
-      seq <- seq.int(3L, nrow(pd_nested) - 2L)
-      pd_nested$indention_ref_pos_id[seq] <- 0L
-      pd_nested$indent[seq] <- 2L
-    }
-    pd_nested
-  }
+		idx_comma <- which(pd$token == "','")
+		idx_open_paren <- grep("'[[(]'", pd$token)
+		idx_close_paren <- grep("'(]|\\))'", pd$token)
+		idx_comma_has_comment <- which(pd$token[idx_comma + 1] == "COMMENT")
+		idx_comma[idx_comma_has_comment] <- idx_comma[idx_comma_has_comment] + 1
+		pd[idx_comma + 1L, "lag_newlines"] <- 1L
+		if (length(idx_open_paren)) {
+			pd[idx_open_paren[1] + 1L, "lag_newlines"] <- 1L
+		}
+		if (length(idx_close_paren)) {
+			pd[idx_close_paren[length(idx_close_paren)], "lag_newlines"] <- 1L
+		}
+		pd
+	}
 
-  tidy_style
+	# Function arguments on new lines, indented with 2 spaces
+	tidy_style$indention$update_indention_ref_fun_dec <- function(pd_nested) {
+		if (pd_nested$token[1] == "FUNCTION" && nrow(pd_nested) > 4) {
+			seq <- seq.int(3L, nrow(pd_nested) - 2L)
+			pd_nested$indention_ref_pos_id[seq] <- 0L
+			pd_nested$indent[seq] <- use_tabs$indent_by
+		}
+		pd_nested
+	}
+
+	tidy_style
 }
 
 #' @describeIn grk_style Style text using the \pkg{grkstyle} code style
 #' @inheritParams styler::style_text
 #' @export
 grk_style_text <- function(text, ...) {
-  styler::style_text(text, ..., transformers = grk_style_transformer())
+	styler::style_text(text, ..., transformers = grk_style_transformer())
 }
 
 #' @describeIn grk_style Style a file using the \pkg{grkstyle} code style
 #' @inheritParams styler::style_file
 #' @export
 grk_style_file <- function(path, ...) {
-  styler::style_file(path, ..., transformers = grk_style_transformer())
+	styler::style_file(path, ..., transformers = grk_style_transformer())
 }
 
 #' @describeIn grk_style Style a directory using the \pkg{grkstyle} code style
 #' @export
 grk_style_dir <- function(path, ...) {
-  styler::style_dir(path, ..., transformers = grk_style_transformer())
+	styler::style_dir(path, ..., transformers = grk_style_transformer())
 }
 
 #' @describeIn grk_style Style a package using the \pkg{grkstyle} code style
 #' @inheritParams styler::style_pkg
 #' @export
 grk_style_pkg <- function(pkg = ".", ...) {
-  styler::style_pkg(pkg, ..., transformers = grk_style_transformer())
+	styler::style_pkg(pkg, ..., transformers = grk_style_transformer())
 }

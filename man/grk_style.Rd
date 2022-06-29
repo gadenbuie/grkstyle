@@ -37,7 +37,8 @@ You can opt into indentation by two spaces by setting the
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# two spaces
 options(grkstyle.use_tabs = FALSE)
-# equivalent
+
+# equivalently, but more precise
 options(grkstyle.use_tabs = list(indent_by = 2, indent_character = " "))
 }\if{html}{\out{</div>}}}
 

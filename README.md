@@ -76,6 +76,19 @@ fruits <- c(
 )
 ```
 
+If you’d like to quickly transition **to tabs** throughout your package
+code, you can use the `grk_reindent_tabs_*()` helper functions. These
+function apply *only* the styler indentation rules and should only
+affect the indentation of your code.
+
+``` r
+# re-indent your package code using tabs
+grk_reindent_tabs_pkg()
+```
+
+There are equivalent helper functions to standardize around spaces,
+e.g. `grk_reindent_spaces_*()`.
+
 ### Line Breaks Inside Function Calls
 
 **unstyled**

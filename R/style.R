@@ -62,16 +62,7 @@ grk_style_transformer <- function(
 	...,
 	use_tabs = getOption("grkstyle.use_tabs", TRUE)
 ) {
-	if (isTRUE(use_tabs)) {
-		use_tabs <- list(indent_by = 1, indent_character = "\t")
-	} else if (identical(use_tabs, FALSE)) {
-		use_tabs <- list(indent_by = 2, indent_character = " ")
-	} else if (!setequal(c("indent_by", "indent_character"), names(use_tabs))) {
-		stop(
-			"`use_tabs` should be one of `TRUE`, `FALSE`, or a list containing ",
-			"items 'intent_by' or 'indent_character'."
-		)
-	}
+	use_tabs <- grk_use_tabs(use_tabs)
 
 	tidy_style <- styler::tidyverse_style(
 		indent_by = use_tabs$indent_by
@@ -134,6 +125,20 @@ grk_style_transformer <- function(
 	}
 
 	tidy_style
+}
+
+grk_use_tabs <- function(use_tabs = getOption("grkstyle.use_tabs", TRUE)) {
+	if (isTRUE(use_tabs)) {
+		use_tabs <- list(indent_by = 1L, indent_character = "\t")
+	} else if (identical(use_tabs, FALSE)) {
+		use_tabs <- list(indent_by = 2L, indent_character = " ")
+	} else if (!setequal(c("indent_by", "indent_character"), names(use_tabs))) {
+		stop(
+			"`use_tabs` should be one of `TRUE`, `FALSE`, or a list containing ",
+			"items 'intent_by' or 'indent_character'."
+		)
+	}
+	use_tabs
 }
 
 #' @describeIn grk_style Style text using the \pkg{grkstyle} code style

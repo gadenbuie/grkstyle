@@ -1,3 +1,5 @@
+styler::cache_activate("grkstyle_test", verbose = FALSE)
+
 test_that("xaringan comments work", {
 	code <- 'base <- c(
 \t"grep",
@@ -18,9 +20,47 @@ as_grk_styled_text <- function(text) {
 	cat(grk)
 }
 
+eval_quo <- function(quo) {
+	eval(unclass(quo)[[2]], envir = attr(quo, ".Environment"))
+}
+
+get_indent_by <- function(indention) {
+	eval_quo(environment(indention$indent_without_paren)$args$indent_by)
+}
+
+test_that("grkstyle.use_tabs option", {
+	use_tags_default <- grk_style_transformer()
+	expect_equal(use_tags_default$indent_character, "\t")
+	expect_equal(get_indent_by(use_tags_default$indention), 1L)
+
+	use_spaces <- with_options(
+		list(grkstyle.use_tabs = FALSE),
+		grk_style_transformer()
+	)
+	expect_equal(use_spaces$indent_character, " ")
+	expect_equal(get_indent_by(use_spaces$indention), 2L)
+
+	use_custom <- with_options(
+		list(grkstyle.use_tabs = list(indent_by = 6L, indent_character = "_")),
+		grk_style_transformer()
+	)
+	expect_equal(use_custom$indent_character, "_")
+	expect_equal(get_indent_by(use_custom$indention), 6L)
+
+  with_options(
+  	list(grkstyle.use_tabs = list(foo = "bar")),
+  	expect_error(grk_use_tabs())
+  )
+})
+
 test_that("tabs not spaces", {
 	text_vec <- 'fruits <- c(\n  "apple",\n  "banana",\n  "mango"\n)'
-	expect_snapshot(as_grk_styled_text(text_vec))
+	expect_snapshot(as_grk_styled_text(text_vec), variant = "tabs")
+
+	with_options(
+		list(grkstyle.use_tabs = FALSE),
+		expect_snapshot(as_grk_styled_text(text_vec), variant = "spaces")
+	)
 })
 
 test_that("line breaks", {
@@ -28,7 +68,12 @@ test_that("line breaks", {
 do_something_very_complicated(something = "that", requires = many,
                               arguments = "some of which may be long")
 '
-	expect_snapshot(as_grk_styled_text(text_line_breaks))
+	expect_snapshot(as_grk_styled_text(text_line_breaks), variant = "tabs")
+
+	with_options(
+		list(grkstyle.use_tabs = FALSE),
+		expect_snapshot(as_grk_styled_text(text_line_breaks), variant = "spaces")
+	)
 })
 
 test_that("function args", {
@@ -39,5 +84,12 @@ long_function_name <- function(a = "a long argument",
   # As usual code is indented by two spaces.
 }
 '
-	expect_snapshot(as_grk_styled_text(text_fn_args))
+	expect_snapshot(as_grk_styled_text(text_fn_args), variant = "tabs")
+
+	with_options(
+		list(grkstyle.use_tabs = FALSE),
+		expect_snapshot(as_grk_styled_text(text_fn_args), variant = "spaces")
+	)
 })
+
+styler::cache_deactivate(FALSE)

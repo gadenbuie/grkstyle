@@ -4,6 +4,9 @@
 # grkstyle
 
 <!-- badges: start -->
+
+[![grkstyle status
+badge](https://gadenbuie.r-universe.dev/badges/grkstyle)](https://gadenbuie.r-universe.dev)
 <!-- badges: end -->
 
 `grkstyle` is an extension package for
@@ -12,11 +15,24 @@ preferences.
 
 ## Installation
 
-You can install the grkstyle from Github
+You can install grkstyle from my
+[r-universe](https://gadenbuie.r-universe.dev):
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("gadenbuie/grkstyle")
+options(repos = c(
+    gadenbuie = "https://gadenbuie.r-universe.dev",
+    getOptions("repos")
+))
+
+# Download and install grkstyle in R
+install.packages("grkstyle")
+```
+
+Or you can install grkstyle directly from Github:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("gadenbuie/grkstyle")
 ```
 
 ## Usage

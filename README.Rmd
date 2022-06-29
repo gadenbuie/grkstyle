@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![grkstyle status badge](https://gadenbuie.r-universe.dev/badges/grkstyle)](https://gadenbuie.r-universe.dev)
+[![R-CMD-check](https://github.com/gadenbuie/grkstyle/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gadenbuie/grkstyle/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 [styler]: https://styler.r-lib.org

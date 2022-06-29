@@ -68,6 +68,8 @@ grk_style_transformer <- function(
 		indent_by = use_tabs$indent_by
 	)
 	tidy_style$indent_character <- use_tabs$indent_character
+	tidy_style$style_guide_name <- "grkstyle::grk_style_transformer@https://github.com/gadenbuie"
+	tidy_style$style_guide_version <- pkg_version()
 
 	# line breaks between *all* arguments if line breaks between *any*
 	tidy_style$line_break$set_linebreak_each_argument_if_multi_line <- function(pd) {

@@ -1,5 +1,7 @@
 ---
-output: github_document
+output: 
+  github_document:
+    pandoc_args: "--preserve-tabs"
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->

@@ -7,6 +7,7 @@
 
 [![grkstyle status
 badge](https://gadenbuie.r-universe.dev/badges/grkstyle)](https://gadenbuie.r-universe.dev)
+[![R-CMD-check](https://github.com/gadenbuie/grkstyle/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gadenbuie/grkstyle/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `grkstyle` is an extension package for
@@ -20,8 +21,8 @@ You can install grkstyle from my
 
 ``` r
 options(repos = c(
-    gadenbuie = "https://gadenbuie.r-universe.dev",
-    getOptions("repos")
+	gadenbuie = "https://gadenbuie.r-universe.dev",
+	getOptions("repos")
 ))
 
 # Download and install grkstyle in R
@@ -86,9 +87,9 @@ fruits <- c(
 
 ``` r
 fruits <- c(
-    "apple",
-    "banana",
-    "mango"
+	"apple",
+	"banana",
+	"mango"
 )
 ```
 
@@ -118,9 +119,9 @@ do_something_very_complicated(something = "that", requires = many,
 
 ``` r
 do_something_very_complicated(
-    something = "that",
-    requires = many,
-    arguments = "some of which may be long"
+	something = "that",
+	requires = many,
+	arguments = "some of which may be long"
 ) 
 ```
 
@@ -149,11 +150,11 @@ long_function_name <- function(a = "a long argument",
 
 ``` r
 long_function_name <- function(
-    a = "a long argument",
-    b = "another argument",
-    c = "another long argument"
+	a = "a long argument",
+	b = "another argument",
+	c = "another long argument"
 ) {
-    # As usual code is indented by two spaces.
+	# As usual code is indented by two spaces.
 } 
 ```
 

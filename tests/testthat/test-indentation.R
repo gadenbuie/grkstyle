@@ -35,3 +35,30 @@ test_that("re-indentation works as expected", {
 		ignore_attr = TRUE
 	)
 })
+
+test_that("re-indentation isn't too aggressive with pipes", {
+	pipe <- 'if (TRUE) {\n  html <- html %>% paste(collapse = "\\n") %>% xml2::read_html()\n}'
+
+	expect_equal(
+		paste(grk_reindent_tabs_text(pipe), collapse = "\n"),
+		sub("\n  ", "\n\t", pipe),
+		ignore_attr = TRUE
+	)
+})
+
+test_that("re-indentation isn't too aggressive with oneline ifs", {
+	if_oneline <- 'if (TRUE) runif(12)'
+
+	expect_equal(
+		paste(grk_reindent_tabs_text(if_oneline), collapse = "\n"),
+		if_oneline,
+		ignore_attr = TRUE
+	)
+
+	if_else_oneline <- 'if (TRUE) runif(12) else runif(13)'
+	expect_equal(
+		paste(grk_reindent_tabs_text(if_else_oneline), collapse = "\n"),
+		if_else_oneline,
+		ignore_attr = TRUE
+	)
+})

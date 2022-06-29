@@ -1,6 +1,6 @@
 Package: grkstyle
 Title: A Tidy R Code Style
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",

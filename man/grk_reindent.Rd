@@ -2,6 +2,9 @@
 % Please edit documentation in R/indentation.R
 \name{grk_reindent}
 \alias{grk_reindent}
+\alias{grk_reindent_auto_text}
+\alias{grk_reindent_auto_file}
+\alias{grk_reindent_auto_dir}
 \alias{grk_reindent_tabs_text}
 \alias{grk_reindent_tabs_file}
 \alias{grk_reindent_tabs_dir}
@@ -12,6 +15,12 @@
 \alias{grk_reindent_spaces_pkg}
 \title{Re-indent R code using tabs or spaces}
 \usage{
+grk_reindent_auto_text(text, ...)
+
+grk_reindent_auto_file(path, ...)
+
+grk_reindent_auto_dir(path, ...)
+
 grk_reindent_tabs_text(text, ...)
 
 grk_reindent_tabs_file(path, ...)
@@ -45,6 +54,15 @@ throught a file, directory or package.
 }
 \section{Functions}{
 \itemize{
+\item \code{grk_reindent_auto_text}: Re-indent text using tabs or spaces according to the
+RStudio project settings or the \code{grkstyle.use_tabs} option.
+
+\item \code{grk_reindent_auto_file}: Re-indent a file using tabs or spaces according to
+the RStudio project settings or the \code{grkstyle.use_tabs} option.
+
+\item \code{grk_reindent_auto_dir}: Re-indent a directory using tabs or spaces according
+to the RStudio project settings or the \code{grkstyle.use_tabs} option.
+
 \item \code{grk_reindent_tabs_text}: Re-indent text using tabs
 
 \item \code{grk_reindent_tabs_file}: Re-indent a file using tabs

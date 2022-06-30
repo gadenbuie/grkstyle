@@ -12,7 +12,7 @@
 \usage{
 use_grk_style()
 
-grk_style_transformer(..., use_tabs = getOption("grkstyle.use_tabs", TRUE))
+grk_style_transformer(..., use_tabs = getOption("grkstyle.use_tabs", NULL))
 
 grk_style_text(text, ...)
 
@@ -24,13 +24,19 @@ grk_style_pkg(pkg = ".", ...)
 }
 \arguments{
 \item{...}{Arguments passed to underling \pkg{styler} functions (identified
-by removing the \code{grk_} prefix), except for \code{transofrmers}, which is set to
+by removing the \code{grk_} prefix), except for \code{transformers}, which is set to
 the \code{grk_style_transformer()} internally.}
 
-\item{use_tabs}{Should a single tab be used for indentation? The new default
-in \pkg{grkstyle} is \code{TRUE}, meaning that tabs are used. I set the RStudio
-global option to show tabs as two spaces. Tabs are recommended because they
-are \href{https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/}{more accessible}.
+\item{use_tabs}{Should a single tab be used for indentation? \pkg{grkstyle}
+functions will by default follow the \code{grkstyle.use_tabs} option, if set, or
+will attempt to look up the project settings in the current RStudio
+project. You can choose to use tabs or spaces for a project by changing the
+\emph{Insert spaces for tab} option in the Code Editing panel of the Project
+Options settings.
+
+If not otherwise set via the R option or the RStudio project option, tabs
+are used. Tabs are recommended because they are
+\href{https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/}{more accessible}.
 
 You can opt into indentation by two spaces by setting the
 \code{grkstyle.use_tabs} option:

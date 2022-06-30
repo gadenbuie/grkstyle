@@ -73,6 +73,15 @@ it’s better for Braille code readers:
 > [Comment](https://github.com/prettier/prettier/issues/7475#issuecomment-668544890)
 > by [MarcoZehe](https://github.com/MarcoZehe)
 
+All of the `grk_style_text()`, `grk_style_file()`, `grk_style_dir()` and
+`grk_style_pkg()` functions will by default automatically detect the
+`UseTabsForSpaces` setting the RStudio project file. You can switch to
+tabs by updating the RStudio project settings to disable “Insert spaces
+for tab” (Tools \> Project Options \> Code Editing \> *Insert spaces for
+tab*) and then running one of the above functions. Alternatively, you
+can set `grkstyle.use_tabs = TRUE` in the `.Rprofile` file in your home
+directory or your project directory.
+
 **unstyled**
 
 ``` r
@@ -104,7 +113,8 @@ grk_reindent_tabs_pkg()
 ```
 
 There are equivalent helper functions to standardize around spaces,
-e.g. `grk_reindent_spaces_*()`.
+e.g. `grk_reindent_spaces_*()`, or to use the RStudio project option,
+e.g. `grk_reindent_auto_*()`.
 
 ### Line Breaks Inside Function Calls
 

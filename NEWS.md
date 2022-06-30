@@ -1,3 +1,13 @@
+# grkstyle 0.2.0
+
+* `grk_style_*()` text, file, directory and package styling functions will now
+  follow the tabs or spaces settings from the RStudio project file. You can
+  choose this setting in the Code Editing panel of the Project Options settings.
+  
+* Added `grk_reindent_auto_*()` to automatically re-indent text, file,
+  directory or package code according to the RStudio project file setting (or
+  the `grkstyle.use_tabs` global R option).
+
 # grkstyle 0.1.1
 
 * Added `grk_reindent_tabs_*()` and `grk_reindent_spaces_*()` helper functions

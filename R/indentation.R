@@ -24,6 +24,35 @@ grk_transform_indentation <- function(indent_by = 1, indent_character = "\t") {
 #' @name grk_reindent
 NULL
 
+
+# Auto --------------------------------------------------------------------
+
+#' @describeIn grk_reindent Re-indent text using tabs or spaces according to the
+#'   RStudio project settings or the `grkstyle.use_tabs` option.
+#' @inheritParams styler::style_text
+#' @export
+grk_reindent_auto_text <- function(text, ...) {
+  indent_transformer <- do.call(grk_transform_indentation, args = grk_use_tabs())
+  styler::style_text(text, ..., transformers = indent_transformer)
+}
+
+#' @describeIn grk_reindent Re-indent a file using tabs or spaces according to
+#'   the RStudio project settings or the `grkstyle.use_tabs` option.
+#' @inheritParams styler::style_file
+#' @export
+grk_reindent_auto_file <- function(path, ...) {
+  indent_transformer <- do.call(grk_transform_indentation, grk_use_tabs())
+  styler::style_file(path, ..., transformers = indent_transformer)
+}
+
+#' @describeIn grk_reindent Re-indent a directory using tabs or spaces according
+#'   to the RStudio project settings or the `grkstyle.use_tabs` option.
+#' @export
+grk_reindent_auto_dir <- function(path, ...) {
+  indent_transformer <- do.call(grk_transform_indentation, grk_use_tabs())
+  styler::style_dir(path, ..., transformers = indent_transformer)
+}
+
 # Tabs --------------------------------------------------------------------
 
 #' @describeIn grk_reindent Re-indent text using tabs

@@ -29,7 +29,7 @@
 #'
 #' grk_style_text(ex_code)
 #' @param ... Arguments passed to underling \pkg{styler} functions (identified
-#'   by removing the `grk_` prefix), except for `transofrmers`, which is set to
+#'   by removing the `grk_` prefix), except for `transformers`, which is set to
 #'   the `grk_style_transformer()` internally.
 #' @name grk_style
 NULL
@@ -42,10 +42,16 @@ use_grk_style <- function() {
 }
 
 #' @describeIn grk_style A code transformer for use with [styler::style_text()]
-#' @param use_tabs Should a single tab be used for indentation? The new default
-#'   in \pkg{grkstyle} is `TRUE`, meaning that tabs are used. I set the RStudio
-#'   global option to show tabs as two spaces. Tabs are recommended because they
-#'   are [more accessible](https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/).
+#' @param use_tabs Should a single tab be used for indentation? \pkg{grkstyle}
+#'   functions will by default follow the `grkstyle.use_tabs` option, if set, or
+#'   will attempt to look up the project settings in the current RStudio
+#'   project. You can choose to use tabs or spaces for a project by changing the
+#'   _Insert spaces for tab_ option in the Code Editing panel of the Project
+#'   Options settings.
+#'
+#'   If not otherwise set via the R option or the RStudio project option, tabs
+#'   are used. Tabs are recommended because they are
+#'   [more accessible](https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/).
 #'
 #'   You can opt into indentation by two spaces by setting the
 #'   `grkstyle.use_tabs` option:
@@ -60,7 +66,7 @@ use_grk_style <- function() {
 #' @export
 grk_style_transformer <- function(
 	...,
-	use_tabs = getOption("grkstyle.use_tabs", TRUE)
+	use_tabs = getOption("grkstyle.use_tabs", NULL)
 ) {
 	use_tabs <- grk_use_tabs(use_tabs)
 
@@ -129,7 +135,33 @@ grk_style_transformer <- function(
 	tidy_style
 }
 
-grk_use_tabs <- function(use_tabs = getOption("grkstyle.use_tabs", TRUE)) {
+grk_use_tabs <- function(use_tabs = getOption("grkstyle.use_tabs", NULL)) {
+	if (is.null(use_tabs)) {
+		root <- tryCatch(
+			rprojroot::find_rstudio_root_file(),
+			error = function(...) NULL
+		)
+
+		if (is.null(root)) {
+			return(grk_use_tabs(TRUE))
+		}
+
+		rproj <- file.path(root, dir(root, pattern = "[.]Rproj$"))
+		rproj <- readLines(rproj, warn = FALSE)
+
+		if (any(grepl("^UseSpacesForTab: No$", rproj))) {
+			return(grk_use_tabs(TRUE))
+		}
+
+		indent_by_chr <- grep("^NumSpacesForTab: \\d+", rproj, value = TRUE)
+		if (!length(indent_by_chr)) {
+			return(grk_use_tabs(FALSE))
+		}
+
+		indent_by <- as.numeric(sub("NumSpacesForTab: ", "", indent_by_chr))
+		return(grk_use_tabs(list(indent_by = indent_by, indent_character = " ")))
+	}
+
 	if (isTRUE(use_tabs)) {
 		use_tabs <- list(indent_by = 1L, indent_character = "\t")
 	} else if (identical(use_tabs, FALSE)) {

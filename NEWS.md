@@ -1,3 +1,8 @@
+# grkstyle 0.2.1
+
+* Added `grk_reindent_auto_pkg()` function, which I messed when adding the auto
+  re-indentation functions.
+
 # grkstyle 0.2.0
 
 * `grk_style_*()` text, file, directory and package styling functions will now

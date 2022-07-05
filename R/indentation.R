@@ -32,8 +32,8 @@ NULL
 #' @inheritParams styler::style_text
 #' @export
 grk_reindent_auto_text <- function(text, ...) {
-  indent_transformer <- do.call(grk_transform_indentation, args = grk_use_tabs())
-  styler::style_text(text, ..., transformers = indent_transformer)
+	indent_transformer <- do.call(grk_transform_indentation, args = grk_use_tabs())
+	styler::style_text(text, ..., transformers = indent_transformer)
 }
 
 #' @describeIn grk_reindent Re-indent a file using tabs or spaces according to
@@ -41,16 +41,24 @@ grk_reindent_auto_text <- function(text, ...) {
 #' @inheritParams styler::style_file
 #' @export
 grk_reindent_auto_file <- function(path, ...) {
-  indent_transformer <- do.call(grk_transform_indentation, grk_use_tabs())
-  styler::style_file(path, ..., transformers = indent_transformer)
+	indent_transformer <- do.call(grk_transform_indentation, grk_use_tabs())
+	styler::style_file(path, ..., transformers = indent_transformer)
 }
 
 #' @describeIn grk_reindent Re-indent a directory using tabs or spaces according
 #'   to the RStudio project settings or the `grkstyle.use_tabs` option.
 #' @export
 grk_reindent_auto_dir <- function(path, ...) {
-  indent_transformer <- do.call(grk_transform_indentation, grk_use_tabs())
-  styler::style_dir(path, ..., transformers = indent_transformer)
+	indent_transformer <- do.call(grk_transform_indentation, grk_use_tabs())
+	styler::style_dir(path, ..., transformers = indent_transformer)
+}
+
+#' @describeIn grk_reindent Re-indent a package using tabs or spaces according
+#'   to the RStudio project settings or the `grkstyle.use_tabs` option.
+#' @export
+grk_reindent_auto_pkg <- function(pkg = ".", ...) {
+	indent_transformer <- do.call(grk_transform_indentation, grk_use_tabs())
+	styler::style_pkg(pkg, ..., transformers = indent_transformer)
 }
 
 # Tabs --------------------------------------------------------------------

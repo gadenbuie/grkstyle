@@ -3,6 +3,7 @@
 export("%>%")
 export(grk_reindent_auto_dir)
 export(grk_reindent_auto_file)
+export(grk_reindent_auto_pkg)
 export(grk_reindent_auto_text)
 export(grk_reindent_spaces_dir)
 export(grk_reindent_spaces_file)

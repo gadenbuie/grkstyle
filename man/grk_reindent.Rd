@@ -5,6 +5,7 @@
 \alias{grk_reindent_auto_text}
 \alias{grk_reindent_auto_file}
 \alias{grk_reindent_auto_dir}
+\alias{grk_reindent_auto_pkg}
 \alias{grk_reindent_tabs_text}
 \alias{grk_reindent_tabs_file}
 \alias{grk_reindent_tabs_dir}
@@ -20,6 +21,8 @@ grk_reindent_auto_text(text, ...)
 grk_reindent_auto_file(path, ...)
 
 grk_reindent_auto_dir(path, ...)
+
+grk_reindent_auto_pkg(pkg = ".", ...)
 
 grk_reindent_tabs_text(text, ...)
 
@@ -61,6 +64,9 @@ RStudio project settings or the \code{grkstyle.use_tabs} option.
 the RStudio project settings or the \code{grkstyle.use_tabs} option.
 
 \item \code{grk_reindent_auto_dir}: Re-indent a directory using tabs or spaces according
+to the RStudio project settings or the \code{grkstyle.use_tabs} option.
+
+\item \code{grk_reindent_auto_pkg}: Re-indent a package using tabs or spaces according
 to the RStudio project settings or the \code{grkstyle.use_tabs} option.
 
 \item \code{grk_reindent_tabs_text}: Re-indent text using tabs

@@ -47,10 +47,10 @@ test_that("grkstyle.use_tabs option", {
 	expect_equal(use_custom$indent_character, "_")
 	expect_equal(get_indent_by(use_custom$indention), 6L)
 
-  with_options(
-  	list(grkstyle.use_tabs = list(foo = "bar")),
-  	expect_error(grk_use_tabs())
-  )
+	with_options(
+		list(grkstyle.use_tabs = list(foo = "bar")),
+		expect_error(grk_use_tabs())
+	)
 })
 
 test_that("tabs not spaces", {

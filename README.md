@@ -22,7 +22,7 @@ You can install grkstyle from my
 ``` r
 options(repos = c(
 	gadenbuie = "https://gadenbuie.r-universe.dev",
-	getOptions("repos")
+	getOption("repos")
 ))
 
 # Download and install grkstyle in R

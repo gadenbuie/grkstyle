@@ -134,7 +134,10 @@ grk_style_transformer <- function(
 
 	# Disable styler's extra indentation of closing `) {` in function declarations
 	# https://github.com/gadenbuie/grkstyle/issues/10
-	tidy_style$indention$unindent_fun_dec <- NULL
+	styler_unindent_fun_dec <- tidy_style$indention$unindent_fun_dec
+	tidy_style$indention$unindent_fun_dec <- function(pd) {
+		styler_unindent_fun_dec(pd, indent_by = 0)
+	}
 
 	tidy_style
 }

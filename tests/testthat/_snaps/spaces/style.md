@@ -14,7 +14,6 @@
     Code
       as_grk_styled_text(text_line_breaks)
     Output
-      
       do_something_very_complicated(
         something = "that",
         requires = many,
@@ -26,7 +25,6 @@
     Code
       as_grk_styled_text(text_fn_args)
     Output
-      
       long_function_name <- function(
         a = "a long argument",
         b = "another argument",

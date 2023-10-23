@@ -20,12 +20,8 @@ as_grk_styled_text <- function(text) {
 	cat(grk)
 }
 
-eval_quo <- function(quo) {
-	eval(unclass(quo)[[2]], envir = attr(quo, ".Environment"))
-}
-
 get_indent_by <- function(indention) {
-	eval_quo(environment(indention$indent_without_paren)$args$indent_by)
+	rlang::eval_tidy(environment(indention$indent_without_paren)$args$indent_by)
 }
 
 test_that("grkstyle.use_tabs option", {

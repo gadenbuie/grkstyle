@@ -18,6 +18,7 @@ BugReports: https://github.com/gadenbuie/grkstyle/issues
 Imports: 
     magrittr,
     purrr,
+    rlang,
     rprojroot,
     styler (>= 1.4.0)
 Suggests: 

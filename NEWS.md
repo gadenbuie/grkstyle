@@ -1,3 +1,9 @@
+# grkstyle 0.2.2
+
+* Fixed compatibility with styler >= 1.11.0, which renamed several internal
+  transformer functions (`unindent_fun_dec`, `update_indention_ref_fun_dec`)
+  to longer, more explicit names (#12).
+
 # grkstyle 0.2.1
 
 * Added `grk_reindent_auto_pkg()` function, which I messed when adding the auto

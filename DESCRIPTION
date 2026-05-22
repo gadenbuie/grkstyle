@@ -1,6 +1,6 @@
 Package: grkstyle
 Title: A Tidy R Code Style
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -20,7 +20,7 @@ Imports:
     purrr,
     rlang,
     rprojroot,
-    styler (>= 1.4.0)
+    styler (>= 1.11.0)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

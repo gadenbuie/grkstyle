@@ -123,7 +123,7 @@ grk_style_transformer <- function(
 	}
 
 	# Function arguments on new lines, indented with 2 spaces
-	tidy_style$indention$update_indention_ref_fun_dec <- function(pd_nested) {
+	tidy_style$indention$update_indention_reference_function_declaration <- function(pd_nested) {
 		if (pd_nested$token[1] == "FUNCTION" && nrow(pd_nested) > 4) {
 			seq <- seq.int(3L, nrow(pd_nested) - 2L)
 			pd_nested$indention_ref_pos_id[seq] <- 0L
@@ -134,9 +134,9 @@ grk_style_transformer <- function(
 
 	# Disable styler's extra indentation of closing `) {` in function declarations
 	# https://github.com/gadenbuie/grkstyle/issues/10
-	styler_unindent_fun_dec <- tidy_style$indention$unindent_fun_dec
-	tidy_style$indention$unindent_fun_dec <- function(pd) {
-		styler_unindent_fun_dec(pd, indent_by = 0)
+	styler_unindent_function_declaration <- tidy_style$indention$unindent_function_declaration
+	tidy_style$indention$unindent_function_declaration <- function(pd) {
+		styler_unindent_function_declaration(pd, indent_by = 0)
 	}
 
 	tidy_style

@@ -1,7 +1,7 @@
 grk_transform_indentation <- function(indent_by = 1, indent_character = "\t") {
 	indention <- styler::tidyverse_style(indent_by = indent_by)$indention
-	indention$unindent_fun_dec <- NULL
-	indention$update_indention_ref_fun_dec <- NULL
+	indention$unindent_function_declaration <- NULL
+	indention$update_indention_reference_function_declaration <- NULL
 
 	styler::create_style_guide(
 		style_guide_name = sprintf("Indent with %s '%s'", indent_by, indent_character),

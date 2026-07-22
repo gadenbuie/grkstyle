@@ -136,7 +136,10 @@ grk_style_transformer <- function(
 	# https://github.com/gadenbuie/grkstyle/issues/10
 	styler_unindent_fun_dec <- tidy_style$indention$unindent_fun_dec
 	tidy_style$indention$unindent_fun_dec <- function(pd) {
-		styler_unindent_fun_dec(pd, indent_by = 0)
+		if (is.null(styler_unindent_fun_dec)) {
+			return(pd)
+		}
+		do.call(styler_unindent_fun_dec, list(pd, indent_by = 0))
 	}
 
 	tidy_style
